@@ -1,7 +1,12 @@
-
 const router = require("express").Router();
+const { check } = require("express-validator/check");
 
 const pageController = require("../controllers/page");
+
+const validate = [
+	check("title", "Title required").isLength({min: 1}),
+	check("content", "Content should not be empty").isLength({min: 1})
+];
 
 router.get("/", async (req, res, next) => {
 	pageController.display("home", req, res, next);
